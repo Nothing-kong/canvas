@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>时钟</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        canvas {
+            background-color: #eeeeee;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+<canvas></canvas>
+</body>
+<script type="text/javascript">
+    var canvas = document.querySelector('canvas')
+    canvas.width = 400;
+    canvas.height = 400;
+    var ctx = canvas.getContext('2d');
+
+    setInterval(function () {
+        ctx.clearRect(0, 0, 2000, 2000);
+        ctx.save();
+
+        ctx.beginPath();
+        ctx.arc(200, 200, 150, 0, 360 / 180 * Math.PI);
+        ctx.stroke();
+
+        ctx.translate(200, 200);
+        ctx.rotate(-90 / 180 * Math.PI);
+
+
+        ctx.save();
+        for (var i = 0; i < 60; i++) {
+            ctx.rotate(6 / 180 * Math.PI);
+            if (i % 5 === 4) continue;
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = '#999';
+            ctx.moveTo(135, 0);
+            ctx.lineTo(145, 0);
+            ctx.stroke();
+        }
+        ctx.restore();
+
+
+        ctx.save();
+        for (var i = 0; i < 12; i++) {
+            ctx.rotate(30 / 180 * Math.PI);
+            ctx.beginPath();
+            ctx.lineWidth = 4;
+            ctx.moveTo(125, 0);
+            ctx.lineTo(145, 0);
+            ctx.stroke();
+        }
+        ctx.restore();
+
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+
+        var hRotate = (h * 60 + m) / 60 * 30;
+        var mRotate = (m * 60 + s) / 60 * 6;
+        var sRotate = s * 6;
+
+        ctx.save();
+        ctx.rotate(sRotate / 180 * Math.PI);
+        ctx.beginPath();
+        ctx.moveTo(-20, 0);
+        ctx.lineTo(120, 0);
+        ctx.strokeStyle = 'red';
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.save();
+        ctx.rotate(mRotate / 180 * Math.PI);
+        ctx.beginPath();
+        ctx.moveTo(-15, 0);
+        ctx.lineTo(100, 0);
+        ctx.strokeStyle = 'deeppink';
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.restore();
+
+
+        ctx.save();
+        ctx.rotate(hRotate / 180 * Math.PI);
+        ctx.beginPath();
+        ctx.moveTo(-10, 0);
+        ctx.lineTo(80, 0);
+        ctx.strokeStyle = 'orange';
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, 6, 0, 360 / 180 * Math.PI);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+
+        ctx.restore();
+
+    }, 1000)
+</script>
+</html>

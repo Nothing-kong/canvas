@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>画板</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #container {
+            width: 800px;
+            height: 500px;
+            border: 1px solid gray;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .color-setting {
+            position: absolute;
+            left: 5px;
+            bottom: 0;
+            width: 60px;
+            height: 110px;
+        }
+
+        .color-setting div {
+            width: 30px;
+            height: 20px;
+            margin: 5px;
+            transition: width 0.5s;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+        }
+
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <canvas height="500" width="800"></canvas>
+    <div class="color-setting">
+        <div class="red item"></div>
+        <div class="yellow item"></div>
+        <div class="blue item"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    var canvas = document.querySelector('canvas');
+    var colorSetting = document.querySelector('.color-setting');
+    var items = document.querySelectorAll('.item');
+    var clear = document.querySelector('#clear');
+    var isDown = false;
+    //获取画笔
+    var ctx = canvas.getContext('2d');
+
+    canvas.onmousedown = function (e) {
+        ctx.beginPath();
+        ctx.moveTo(e.offsetX, e.offsetY);
+        isDown = true;
+    }
+    canvas.onmousemove = function (e) {
+        if (!isDown) {
+            return
+        }
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+
+    }
+    canvas.onmouseup = function (e) {
+        isDown = false;
+    }
+    colorSetting.onclick = function (e) {
+        if (e.target.classList.contains('item')) {
+            var color = getComputedStyle(e.target).backgroundColor;
+            ctx.strokeStyle = color;
+            items.forEach(function (item) {
+                item.style.width = '30px';
+            })
+            e.target.style.width = '50px';
+        }
+    }
+
+</script>
+</body>
+</html>

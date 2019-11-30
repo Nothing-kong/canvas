@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        #huabu {
+            border: 1px solid gray;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<canvas id="huabu" width="800" height="800"></canvas>
+</body>
+<script type="text/javascript">
+    var canvas = document.querySelector('#huabu');
+    var ctx = canvas.getContext('2d');
+
+    // ctx.fillStyle = '#bfa';
+    // ctx.fillRect(100, 100, 200, 200)
+    // // ctx.rect(500,500,50,50);
+    // // ctx.fill();
+    // ctx.strokeStyle = '#999';
+    // ctx.lineWidth = 4;
+    // ctx.strokeRect(300, 300, 400, 400);
+    // ctx.rect(100, 100, 200, 200);
+    // ctx.stroke();
+    // ctx.fillStyle = '#bfa'
+    // ctx.strokeStyle = '#666'
+    // ctx.lineWidth = 5;
+    // ctx.rect(100,100,600,600);
+    // ctx.fill();
+    // ctx.stroke();
+
+
+    ctx.beginPath();
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = 'rgb(90,200,254)';
+    ctx.moveTo(200, 200);
+    ctx.lineTo(400, 200);
+    ctx.stroke();
+    //
+    ctx.beginPath();
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = 'rgb(52,131,14)';
+    ctx.moveTo(400, 200);
+    ctx.lineTo(400, 400);
+    ctx.stroke();
+    //
+    ctx.beginPath();
+    ctx.lineWidth = 6;
+    ctx.strokeStyle = 'rgb(123,51,225)';
+    ctx.moveTo(400, 400);
+    ctx.lineTo(200, 200);
+    ctx.stroke();
+
+
+    ctx.beginPath();
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = 'rgb(123,51,225)';
+    // ctx.lineCap = 'round';
+    // ctx.lineCap = 'butt';
+    // ctx.lineCap = 'square';
+    ctx.moveTo(500, 200);
+    ctx.lineTo(600, 300);
+    ctx.lineTo(500, 400);
+    ctx.lineJoin = 'round';
+    ctx.lineJoin = 'bevel';
+    ctx.lineJoin = 'miter';
+
+    ctx.closePath();
+    ctx.stroke();
+
+</script>
+</html>
